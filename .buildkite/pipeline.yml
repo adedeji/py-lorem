@@ -1,0 +1,6 @@
+steps:
+  - label: ":wave: Hello Buildkite"
+    command: "echo 'Hello from my self-hosted Buildkite agent'"
+    agents:
+      queue: "self-hosted"
+    
