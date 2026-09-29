@@ -8,12 +8,15 @@ steps:
     plugins:
       - docker#v5.13.0:
           image: "python:3.13"
+    artifact_paths:
+      - "result.txt"
     agents:
       queue: "self-hosted"
    
   - label: ":memo: Annotate sentence"
     depends_on: "generate-sentence"
     commands: |
+      buildkite-agent artifact download "result.txt"
       buildkite-agent annotate "$(cat result.txt)" --style "info" --context "sentence-result"
     agents:
       queue: "self-hosted" 
