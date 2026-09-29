@@ -16,7 +16,7 @@ steps:
   - label: ":memo: Annotate sentence"
     depends_on: "generate-sentence"
     commands: |
-      buildkite-agent artifact download "result.txt"
+      buildkite-agent artifact download "result.txt" .
       buildkite-agent annotate "$(cat result.txt)" --style "info" --context "sentence-result"
     agents:
       queue: "self-hosted" 
