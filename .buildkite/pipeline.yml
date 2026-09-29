@@ -19,4 +19,26 @@ steps:
       buildkite-agent artifact download "result.txt" .
       buildkite-agent annotate "$(cat result.txt)" --style "info" --context "sentence-result"
     agents:
+      queue: "self-hosted"
+
+  - label: ":python: Generate paragraph"
+    key: "generate-paragraph"
+    command: |
+      pip install .
+      python -c "import loremipsum; print(loremipsum.paragraph(max_char=100))" > result2.txt
+      cat result2.txt
+    plugins:
+      - docker#v5.13.0:
+          image: "python:3.13"
+    artifact_paths:
+      - "result2.txt"
+    agents:
+      queue: "self-hosted"
+  
+  - label: ":memo: Annotate paragraph"
+    depends_on: "generate-paragraph"
+    commands: |
+      buildkite-agent artifact download "result2.txt" .
+      buildkite-agent annotate "$(cat result2.txt)" --style "info" --context "paragraph-result"
+    agents:
       queue: "self-hosted" 
