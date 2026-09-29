@@ -1,7 +1,7 @@
 steps:
   - label: ":python: Generate sentence"
     command: |
-      python install .
+      pip install .
       python -c "import loremipsum; print(loremipsum.sentence(max_char=20))"
     plugins:
       - docker#v5.13.0:
