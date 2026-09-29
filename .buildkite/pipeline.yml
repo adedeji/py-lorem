@@ -12,7 +12,7 @@ steps:
       queue: "self-hosted"
    
   - label: ":memo: Annotate sentence"
-    depends_on: "generate_sentence"
+    depends_on: "generate-sentence"
     commands: |
       buildkite-agent annotate "$(cat result.txt)" --style "info" --context "sentence-result"
     agents:
