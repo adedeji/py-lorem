@@ -1,6 +1,11 @@
 steps:
-  - label: ":wave: Hello Buildkite"
-    command: "echo 'Hello from my self-hosted Buildkite agent!'"
+  - label: ":python: Generate sentence"
+    command: |
+      python install .
+      python -c "import loremipsum; print(loremipsum.sentence(max_char=20))"
+    plugins:
+      - docker#v5.13.0:
+          image: "python:3.13"
     agents:
       queue: "self-hosted"
     
