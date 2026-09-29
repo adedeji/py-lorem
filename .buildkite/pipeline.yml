@@ -41,4 +41,4 @@ steps:
       buildkite-agent artifact download "result2.txt" .
       buildkite-agent annotate "$(cat result2.txt)" --style "info" --context "paragraph-result"
     agents:
-      queue: "self-hosted" 
+      queue: "self-hosted"
